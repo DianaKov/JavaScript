@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        p{
+            font-size: 22px;
+            color:brown;
+        }
+        div{
+            font-size: 18px;
+        }
+    </style>
+    <div>
+        1. Среди трех чисел найти среднее арифметическое. Если среди чисел есть равные, вывести сообщение "Ошибка".<br>
+        Числа принять от пользователя.<br>
+        2. Определить какое из трех, введенных пользователем, чисел максимальное и вывести его на экран.
+    </div>
+    <p>
+        <script>
+            var num1= +prompt("Считаем среднее арифметическое. Введите 1-е число:");
+            var num2 = +prompt("Считаем среднее арифметическое. Введите 2-е число:");
+            var num3 = +prompt("Считаем среднее арифметическое. Введите 3-е число:");
+            var average = ((num1 + num2 + num3) /3);
+
+            if(num1 == num2 || num1 == num3 || num2 == num3){
+                document.writeln("Ошибка! (Введите разные числа)");
+            }else{
+                document.writeln("Среднее арифметическое чисел: " + `${num1}, ${num2}, ${num3} ` + "= " + average + ";");
+            }
+
+            var max;
+             
+            if(num1 > num2 && num1 > num3){
+                max = num1;
+            }else if(num2 > num3){
+                max = num2;
+            }else{
+                max = num3;
+            }
+            document.writeln(" Максимaльное число: " + max);
+        </script>
+    </p>
+    
+    <div>3. Построить прямоугольный треугольник состоящий из символа "*".
+    </div>
+    <p>
+        <script>
+            for(var i = 0; i < 10; i++){
+                for(var j = 0; j < i; j++){
+                    document.write('*');
+                }
+                document.write('<br/>');
+            }            
+        </script>
+    </p>
+    <div>
+        4. Дано два числа A и B где (A меньше B). Выведите на экран суму всех чисел расположенных в числовом промежутке от А до В.<br> 
+        Выведите на экран все нечетные значения, расположенные в числовом промежутке от А до В. 
+    </div>
+    <p>
+        <script>
+            var a = +prompt("Введите число а: ");
+            var b = +prompt("Введите число в:");
+            var sum = 0;
+            document.writeln("Нечетные значения в числовом промежутке: ");
+            for(var i = a; i <= b; i++){
+                sum += i;
+                if(i % 2 != 0){
+                    document.writeln(+i);
+                }
+            }document.writeln("Сумма всех чисел расположенных в числовом промежутке: "+sum);
+        </script>
+    </p>
+    
+    <div>5. Вывести на экран ряд чисел Фибоначчи, состоящий из n элементов (n принять от пользователя). <br>
+        Числа Фибоначчи – это элементы числовой последовательности, в которой каждое последующее число равно сумме двух предыдущих.
+    </div>
+    <p>
+        <script>
+            var n = +prompt("Введите количество элементов: ");
+            var f = [0, 1];
+            for (i = 2; i < n+2; i ++) {
+                f[i] = f[i-1] + f[i-2];
+            }
+            document.writeln(f.slice(2, n+2)); //отрезаем первые 2 элемента (0 и 1)
+        </script>
+    </p>
+    <div>
+        6. Вывести на экран таблицу умножения от 1 до 9. 
+    </div>
+    <p>
+        <script>
+            for (let i = 1; i <= 9; i++) {
+                document.writeln("<br>");
+                for (let j = 1; j <= 9; j++) {
+                    document.writeln(i + "*" + j + "=" + (i * j) +"<br>")
+                }
+            }
+        </script>
+    </p>
+</body>
+</html>
