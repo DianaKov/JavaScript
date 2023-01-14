@@ -101,9 +101,17 @@ console.log(lastButOneElem);
 
 var array_team = ["Бавария", "Ливерпуль", "Манчестер Сити", "Реал Мандрид", "Челси", "Барселона", "ПСЖ", "Ювентуз", "Манчестер Юнайтед", "Атлетико М"]
 var array_goal = [138, 134, 134, 124, 123, 117, 112, 107, 105, 105];
+
+//1-й способ
+
+for (var i = 0; i < array_team.length; i++){
+    console.log(array_team[i].concat(` - ${array_goal[i]}; \n`));
+}
+
+//2-й способ
 var newArray = [];
 
-for (let i = 0; i < array_team.length; i++) {
+for (var i = 0; i < array_team.length; i++) {
     newArray.push(`${array_team[i]} - ${array_goal[i]}`);
 }
 console.log(newArray.join(";" + '\n'));
