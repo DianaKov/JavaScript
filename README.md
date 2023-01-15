@@ -1,4 +1,4 @@
-# JavaScript
+#  <img height=50 src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png"> JavaScript
 В этом репозитории собраны задачи по курсу FrontEnd (JavaScript):
 1. Введение в джава скрипт
     1. По координатам двух точек, которые вводит пользователь, определить уравнение прямой, проходящей через эти точки.
