@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			background: url(./img/1643000629_19-phonoteka-org-p-fon-tsifri-19.jpg) no-repeat;
+            background-size: cover;
+		}
+		.calculator{
+			background: black;
+			width: fit-content;
+			color: white;
+			padding: 1%;
+			margin-top: 3%;
+			margin-left: 40%;
+			box-shadow: 18px 14px 16px 0px rgb(0 0 0 / 71%);
+		}
+		.calculator__inp{
+			width: 260px;
+			background: #c2c2c2;;
+			text-align: right;
+			height: 100px;
+			color: black;
+			font-size: 40px;
+			margin-bottom: 5%;
+			box-shadow: inset 2px 2px 5px rgb(154 147 140 / 50%), 1px 1px 5px rgb(255 255 255);		
+		}
+		.calculator__grid{
+			display: grid;
+			grid-template-columns: repeat(4, 50px);
+			grid-template-rows: repeat(5, 50px);
+			grid-gap: 10px;
+			padding: 5%;
+    		box-shadow: inset 2px 2px 5px rgb(154 147 140 / 50%), 1px 1px 5px rgb(255 255 255);
+
+		}
+		.calculator__grid>div{
+			text-align: center;
+			line-height: 50px;
+			font-size: 23px;
+			cursor: pointer;
+			border-radius: 50%;
+		}
+		.calculator__grid>div:hover{
+			background-color: antiquewhite;
+			color:black;
+		}
+		.calculator__grid>div:nth-child(17){
+			grid-row: 5;
+			grid-column: 1/3;
+			border-radius: 40px;
+		}
+		.number{
+			background: grey;
+		}
+		.sign,
+		.result{
+			background: orange;
+		}
+		.toggleSign,
+		.percent,
+		.clear{
+			background: lightgray;
+		}
+
+
+		
+	</style>
+</head>
+<body>
+	<div class="calculator">
+		<input type="text" class="calculator__inp" id="input">
+		<div class="calculator__grid">
+			<div class="clear">A/C</div>
+			<div class="toggleSign">+/-</div>
+			<div class="percent">%</div>
+			<div class="sign">/</div>
+			<div class="number">7</div>
+			<div class="number">8</div>
+			<div class="number">9</div>
+			<div class="sign">*</div>
+			<div class="number">4</div>
+			<div class="number">5</div>
+			<div class="number">6</div>
+			<div class="sign">-</div>
+			<div class="number">1</div>
+			<div class="number">2</div>
+			<div class="number">3</div>
+			<div class="sign">+</div>
+			<div class="number">0</div>
+			<div class="number">.</div>
+			<div class="result">=</div>
+		</div>
+	</div>
+	<script>
+		var number = document.querySelectorAll('.number');
+		var inp = document.querySelector('.calculator__inp');
+		var sign  = document.querySelectorAll('.sign');
+		var result = document.querySelector('.result');
+		var toggleSign = document.querySelector('.toggleSign'); 
+		var percent = document.querySelector('.percent');
+		var clear = document.querySelector(".clear"); 
+
+		for(i=0; i<number.length; i++){
+			number[i].addEventListener('click', insertValue);
+		}
+
+		for(i=0;i<sign.length;i++){
+			sign[i].addEventListener('click', insertValueSign);
+		}
+
+		function insertValue() {//ввод чисел
+			inp.value += this.innerText;
+		}
+
+		function insertValueSign(){//ввод знаков
+			if (!(isNaN(inp.value[inp.value.length - 1]))) {
+				inp.value += this.innerText;
+			}
+			if(!(e.keyCode == 107)){
+				inp.value += this.innerText;
+			}
+		}
+
+		clear.onclick = function(e) {//очищает инпут
+			inp.value = "";
+		};
+
+		result.onclick = function(e) {//результат
+			inp.value = eval(inp.value);
+		}
+
+		toggleSign.addEventListener('click',function(e){//  +/-
+			toggleSign = inp.value * (-1);
+			inp.value = eval(toggleSign);
+		});
+
+		percent.addEventListener('click',function(e){//  %
+			percent = inp.value / 100;
+			inp.value = eval(percent);
+		});
+
+		document.body.addEventListener('keydown',function(e){ //ентер с клавиатуры
+			if(e.keyCode == 13){
+				 getResult();	
+			}
+		});
+
+		input.onkeypress = e => (
+			!(e.key === "." && ~input.value.indexOf(".")) && 
+			!(e.key === "+" && ~input.value.indexOf("+")) &&
+			!(e.key === "+" && ~input.value.indexOf("/")) &&
+			!(e.key === "+" && ~input.value.indexOf("%")) &&
+			!(e.key === "+" && ~input.value.indexOf("-"))
+		)
+		
+	</script>
+</body>
+</html>
