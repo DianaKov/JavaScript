@@ -123,9 +123,6 @@
 			if (!(isNaN(inp.value[inp.value.length - 1]))) {
 				inp.value += this.innerText;
 			}
-			if(!(e.keyCode == 107)){
-				inp.value += this.innerText;
-			}
 		}
 
 		clear.onclick = function(e) {//очищает инпут
@@ -135,6 +132,18 @@
 		result.onclick = function(e) {//результат
 			inp.value = eval(inp.value);
 		}
+
+		result.addEventListener('click',getResult);
+
+		function getResult(){
+			inp.value = eval(inp.value)
+		}	
+
+        document.body.addEventListener('keydown', (event) => {
+			if (event.keyCode === 32 || event.keyCode === 8) {
+				clearAll();
+			}
+		  });
 
 		toggleSign.addEventListener('click',function(e){//  +/-
 			toggleSign = inp.value * (-1);
@@ -151,14 +160,13 @@
 				 getResult();	
 			}
 		});
-
-        document.body.addEventListener('keydown', (event) => {
-			if (event.keyCode === 32 || event.keyCode === 8) {
-				clearAll();
+/*
+		document.body.addEventListener('keydown',function(e){ //ентер с клавиатуры
+			if(e.keyCode == 106 || e.keyCode == 107 || e.keyCode == 109|| e.keyCode == 110 || e.keyCode == 111){
+				 getResult();	
 			}
-		  });
-
-
+		}); РАБОТАЕТ, НО НЕ ТАК КАК НУЖНО!!!
+*/
 		input.onkeypress = e => (
 			!(e.key === "." && ~input.value.indexOf(".")) && 
 			!(e.key === "+" && ~input.value.indexOf("+")) &&
