@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--3. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект,
+содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.-->
+
+    <header>Employees(name, sName, age, occupation):</header>
+    
+    <script>
+        const array = [];
+        const num = +prompt('Enter the number of employees');
+
+        for(let i = 1; i<=num; i++){
+            array[i] = {
+                name: prompt('Name'),
+                sName: prompt('sName'),
+                age: +prompt('age'),
+                occupation: prompt('occupation'),
+                show: function (){
+                    document.write('Employee ' + i + ": " + this.name + ', ' + this.sName + ', ' + this.age + ', ' + this.occupation +"." + '<br>');
+                }
+            }
+            array[i].show();
+        }
+    </script>
+</body>
+</html>
