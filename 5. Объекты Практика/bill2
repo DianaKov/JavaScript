@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .table{
+            width:80%;
+            margin: 0 auto;
+            margin-top: 5%;
+        }
+        td{
+            padding: 0 20px;
+        }
+        table{
+            border: 2px dashed black;
+
+        }
+        #sum3{
+            padding-bottom: 20px;
+        }
+        .btn{
+            font-size: 18px;
+            line-height: 24px;
+            color: #CCCCCC;
+            background-color: #2E2E2E;
+            margin-top: 1rem;
+        }
+    </style>
+    <div class="table">
+        <table>
+            <tbody>
+                <tr>
+                    <td rowspan="15" style="border-right:2px dashed black;">Квитанція</td>
+                    <td style="padding-top: 20px;">Отримувач платежу: Приватний виконавець Чулієв А.А.</td>
+                    <td>3063807313</td>
+                </tr>
+                <tr>
+                    <td>26221500052921</td>
+                    <td>Ідентифікаційний код отримувача</td>
+                </tr>
+                <tr>
+                    <td>Поточний рахунок отримувача</td>
+                    <td>322669</td>
+                </tr>
+                <tr>
+                    <td>ТВБВ №10026/0162 філії Головного управління по м. Києву та Київській області АТ "Ощадбанк"</td>
+                    <td>Код установи банку</td>
+                </tr>
+                <tr>
+                    <td>Установа банку</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">рио, лро</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="fullName"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" id="adress"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">Ідентифікаційний номер клієнта</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Призначення платежу	Авансовий внесок</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Період платежу</td>
+                </tr>
+                <tr>
+                    <td colspan="2"> Код виду платежу</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2" id='sum3'></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn">PRINT</button>
+    </div>
+</body>
+<script>
+
+    const cost = document.querySelector('#sum3');
+    cost.innerHTML = `<b>Сумма ${localStorage.getItem('cost')} грн.</b> `;
+
+    const fullName = document.querySelector('#fullName');
+    fullName.innerHTML = `<b>${localStorage.getItem('fullName')}</b>`;
+
+    const adress = document.querySelector('#adress');
+    adress.innerHTML = `<b>${localStorage.getItem('adress')}</b>`;
+
+</script>
+</html>
