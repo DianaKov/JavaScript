@@ -1,0 +1,165 @@
+<!--  Алгоритм взаємодії з клієнтом наступний: 
+В налаштуваннях цієї програми необхідно вводити одну константу мінімальну заробітну плату, це десь на адміністративній частині сайту, що недоступна користувачу.
+Ось дещо структурований алгоритм взаємодії
+Оберіть характер стягнення:
+варіанти: 
+1. майнове                         2. немайнове
+1.1        Якщо майнове то: введіть суму боргу, яку необхідно стягнути,
+1.1.1     якщо 2% від суми боргу менше або дорівнює 10 мінімальним заробітним платам  то розмір авансового внеску дорівнює 2% від суми, яку необхідно стягнути
+1.1.2     якщо 2% від суми боргу більше 10 мін. заробітних плат то сума авансового внеску дорівнює 10 мінімальним заробітним платам.
+ 
+2.1 Якщо немайнове, то питання: зазначте будь ласка стягувача із запропонованих варіантів 
+2.1.1     стягувачем є фізична особа (громадянин)  наслідок      розмір авансового внеску 1 мінімальна  заробітна плата програма розраховує
+2.1.2     Стягувачем є юридична особа (підприємство, установа, організація)  наслідок розмір авансового внеску 2 мінімальні заробітні плати  програма розраховує  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.form__typeOfDebt{
+		display: flex;
+	}
+	.form__typeOfCreditor{
+		display: flex;
+	}
+	.hide{
+		display: none!important;
+	}
+	.wrapper{
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.form{
+		width: 400px;
+	}
+	.form__header{
+		background: aqua;
+		text-align: center;
+	}
+	.form__footer{
+		background: aqua;
+		text-align: center;
+	}
+	.form>div{
+		display: flex;
+		justify-content: space-between;
+		padding: 20px;
+	}
+	input[type="text"]{
+		width: 225px;
+	}
+	#cost{
+		color: red;
+		font-weight: bold;
+	}
+	.form__typeOfCreditor{
+		width: 75%;
+		margin: auto;
+		border-top: 1px solid black;
+	}
+
+	.form .form__header{
+		justify-content: center;
+	}
+</style>
+<body>
+	<div class="wrapper">
+		<form action="" class="form">
+			<div class="form__header">Форма розрахунку платежу</div>
+			<div><span>ПІБ:</span><input type="text" id="fullName" onkeyup="this.value = this.value.replace (/[^а-яА-Я\s\і\ї\І\Ї\ґ\Ґ\є\Є]/, '')"></div>
+			<div><span>Адреса:</span><input type="text" id="adress" onkeyup="this.value = this.value.replace (/[^а-яА-Я\s\і\ї\І\Ї\ґ\Ґ\є\Є]/, '')"></span></div>
+			<div class="form__typeOfDebt">
+				<div><input type="radio" name="toggleTypeOfDebt" checked ="checked" id="own" class="form__typeOfDebtInput"><span>майнове</span></div>
+				<div><input type="radio" name="toggleTypeOfDebt" id="currency" class="form__typeOfDebtInput"><span>немайнове</span></div>
+			</div>
+
+			<div class="form__typeOfCreditor hide">	
+				<div><input type="radio" name="toggleTypeOfCreditor" id="person"><span>фізична особа</span></div>
+				<div><input type="radio" name="toggleTypeOfCreditor" id="company"><span>юридична особа</span></div>
+			</div>
+			<div class="form__sum"><span>Сума боргу:</span><input type="text" id="debt" onkeyup="this.value = this.value.replace (/[^0-9.]/, '')"></div>
+			<div><span>Комісія:</span><div id="cost"></div></div>
+			<div class="form__footer">
+				<input type="button" value="Сформувати платіж">
+				<a href="bill2.html" target="_self"><input type="button" value="Сформувати квитанцію"></a>
+			</div>
+		</form>
+
+		<script>
+
+			let minWage = 6700;
+			const debt = document.querySelector('#debt');
+			const cost = document.querySelector('#cost');
+			const own = document.querySelector('#own');
+			const currency = document.querySelector('#currency');
+			const typeOfDebtInput = document.querySelectorAll('.form__typeOfDebtInput');
+			const typeOfCreditor = document.querySelector('.form__typeOfCreditor');
+			const formSumBlock = document.querySelector('.form__sum');
+			const person = document.querySelector('#person');
+			const company = document.querySelector('#company');
+			const fullName = document.querySelector('#fullName');
+			const adress = document.querySelector('#adress');
+
+			debt.addEventListener('input', getPayment);
+			currency.addEventListener('change', toggleFormStruture);
+			company.addEventListener('change', togglePersonType);
+			person.addEventListener('change',toggleCompanyType);
+			own.addEventListener('change', toggleFormStruture);
+			fullName.addEventListener('input', showFullName);
+			adress.addEventListener('input', showAdress);
+
+			function togglePersonType(){
+				cost.innerText = `${minWage*2} грн`;
+				localStorage.setItem('cost', (minWage*2));
+			}
+
+			function toggleCompanyType(){
+				cost.innerText = `${minWage} грн`;
+				localStorage.setItem('cost',(minWage))
+			}
+
+			function getPayment(){
+				for(i=0;i<typeOfDebtInput.length;i++){
+					if(typeOfDebtInput[i].id == "own" && typeOfDebtInput[i].checked == true){
+						if(debt.value * 0.02 <= 10*minWage){
+							cost.innerText = (debt.value * 0.02).toFixed(2);
+							localStorage.setItem('cost',((debt.value * 0.02).toFixed(2)))
+						}
+						else{
+							cost.innerText = minWage*10;
+							localStorage.setItem('cost',(minWage*10))
+						}
+					}
+				}
+			}
+
+			function toggleFormStruture(){
+				typeOfCreditor.classList.toggle('hide');
+				formSumBlock.classList.toggle('hide');
+				cost.innerText = '';
+			}
+
+			function showFullName(){
+				fullName.innerText = fullName.value;
+				localStorage.setItem('fullName', (fullName.value));
+			}
+
+			function showAdress(){
+				adress.innerText = adress.value;
+				localStorage.setItem('adress', (adress.value));
+			}
+
+		</script>
+	</div>	
+</body>
+</html>
