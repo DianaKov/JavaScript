@@ -32,9 +32,9 @@ const result = document.querySelector('#result');
 //time
 function getTimeRemaining(endtime) {
     // функция берет строку с временем окончания и считает разницу между этим временем и текущим
-    var t = Date.parse(endtime) - Date.parse(new Date());//в этой переменной сохраняеться оставшееся время
-    var seconds = Math.floor((t / 1000) % 60);
-    var minutes = Math.floor((t / 1000 / 60) % 60);
+    let t = Date.parse(endtime) - Date.parse(new Date());//в этой переменной сохраняеться оставшееся время
+    let seconds = Math.floor((t / 1000) % 60);
+    let minutes = Math.floor((t / 1000 / 60) % 60);
 
     return {
       'minutes': minutes,
@@ -44,12 +44,12 @@ function getTimeRemaining(endtime) {
    
   function initializeClock(id, endtime) {
     //функция которая отображает данные в документе
-    var clock = document.getElementById(id);
-    var minutesSpan = clock.querySelector('.minutes');
-    var secondsSpan = clock.querySelector('.seconds');
+    let clock = document.getElementById(id);
+    let minutesSpan = clock.querySelector('.minutes');
+    let secondsSpan = clock.querySelector('.seconds');
    
     function updateClock() {
-      var t = getTimeRemaining(endtime);
+      let t = getTimeRemaining(endtime);
       minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
       secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
    
@@ -59,8 +59,8 @@ function getTimeRemaining(endtime) {
     }
    
     updateClock();
-    var timeinterval = setInterval(updateClock, 1000);
+    let timeinterval = setInterval(updateClock, 1000);
   }
    
-  var deadline = new Date(Date.parse(new Date()) + 40 * 60 * 1000); // устанавливаю 40 минут
+  let deadline = new Date(Date.parse(new Date()) + 40 * 60 * 1000); // устанавливаю 40 минут
   initializeClock('countdown', deadline);
