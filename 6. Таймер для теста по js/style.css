@@ -1,0 +1,79 @@
+h1{
+    text-align: center;
+}
+.student-info{
+    display: flex;
+    width: 70%;
+    margin: 30px auto;
+    justify-content: space-around;
+}
+ul{
+    list-style: none;
+}
+/*#result{
+    position: fixed;
+    background: white;
+    padding: 20px;
+    right: 20px;
+    top: 20px;
+}*/
+.bgGreen{
+    background: green;
+}
+.bgRed{
+    background: red;
+}
+.test-item-blue{
+    color:blue;
+}
+.test-question-blue{
+    color:blue;
+    font-size: 18px;
+}
+.test-item-red{
+    color:red;
+}
+.test-number-center{
+    margin-left:2%;
+}
+b{
+    font-size: 18px;
+}
+
+/*time*/
+.countdown-title {
+    color: #396;
+    font-weight: 100;
+    font-size: 40px;
+    margin: 40px 0px 20px;
+  }
+   
+  .countdown {
+    position: fixed;
+    right: 5vh;
+    top: 5vh;
+    font-family: sans-serif;
+    color: #fff;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+  }
+   
+  .countdown-number {
+    padding: 10px;
+    border-radius: 5px;
+    background: #4E91AD;
+    display: inline-block;
+  }
+   
+  .countdown-time {
+    padding: 15px;
+    border-radius: 5px;
+    background: #ACD4E6;
+    display: inline-block;
+  }
+   
+  .countdown-text {
+    padding-top: 5px;
+    font-size: 16px;
+  }
