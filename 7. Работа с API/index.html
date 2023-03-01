@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid__img{
+            height: 200px;
+            width:300px;
+        }
+        .grid{
+            display: grid;
+            width:80%;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 25px;
+            margin: auto;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination input {
+            width: 50px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+    <div class="pagination">
+        <button onclick="goToPage(currentPage - 1)">Previous</button>
+        <input type="number" min="1" max="${Math.ceil(data.photos.length / 9)}" onchange="goToPage(parseInt(this.value))">
+        <button onclick="goToPage(currentPage + 1)">Next</button>
+    </div>
+    <script>
+        let data; 
+        fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=8sCA1X7XDcUTr1fMwyY4i08qUFxCCjuz5idffk9H')
+          .then(response => response.json())
+          .then(json => {
+            data = json;
+            renderItems(0, 6);
+          });
+
+
+        const grid = document.querySelector('.grid');
+        let currentPage = 1;
+
+        function renderItems(start, end) {
+            grid.innerHTML = '';
+            let dataArr = data.photos.slice(start, end);
+            dataArr.forEach(function(el){
+                let html = `
+                    <div class="grid__item">
+                        <img src="${el.img_src}" class="grid__img" alt="">
+                        <div class="grid__name">${el.camera.full_name}</div>
+                        <div class="grid__name">${el.camera.name}</div>
+                        <div class="grid__title">${el.earth_date}</div>
+                        <div class="grid__info">${el.id}</div>
+                        <div class="grid__field">${el.rover.name}</div>
+                        <div class="grid__field">${el.rover.status}</div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', html);
+            })
+        }
+
+        function goToPage(page) {
+            if (page < 1) {
+                page = 1;
+            }
+            if (page > Math.ceil(data.photos.length / 6)) {
+                page = Math.ceil(data.photos.length / 6);
+            }
+            currentPage = page;
+            let start = (currentPage - 1) * 6;
+            let end = currentPage * 6;
+            renderItems(start, end);
+        }
+
+		
+    </script>
+</body>
+</html>
