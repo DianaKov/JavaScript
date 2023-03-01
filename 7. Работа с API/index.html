@@ -31,7 +31,7 @@
     <div class="grid"></div>
     <div class="pagination">
         <button onclick="goToPage(currentPage - 1)">Previous</button>
-        <input type="number" min="1" max="${Math.ceil(data.photos.length / 9)}" onchange="goToPage(parseInt(this.value))">
+        <input type="number" min="1" max="${Math.ceil(data.photos.length / 6)}" onchange="goToPage(parseInt(this.value))">
         <button onclick="goToPage(currentPage + 1)">Next</button>
     </div>
     <script>
